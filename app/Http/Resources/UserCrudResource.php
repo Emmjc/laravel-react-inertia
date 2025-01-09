@@ -8,6 +8,8 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class UserCrudResource extends JsonResource
 {
+    //This line of code is to see data in the frontend when it is passed.
+    public static $wrap = false;
     /**
      * Transform the resource into an array.
      *
