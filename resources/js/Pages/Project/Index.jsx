@@ -192,7 +192,7 @@ export default function Index({projects, queryParams = null, success}){
                                                 </Link>
 
                                                 <button 
-                                                    onClick={(e) => deleteProject (project)}
+                                                    onClick={(e) => deleteProject(project)}
                                                     className="font-medium text-red-600 dark:text-red-500 hover:underline mx-1">
                                                     Delete
                                                 </button>

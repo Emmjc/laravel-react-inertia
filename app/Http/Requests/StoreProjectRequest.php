@@ -22,6 +22,7 @@ class StoreProjectRequest extends FormRequest
      */
     public function rules(): array
     {
+        //rules kung ano mga pede kabit kapag nag ccreate and nag eedit.
         return [
             'name'=> ['required','max:255'],
             'image'=> ['nullable','image'],

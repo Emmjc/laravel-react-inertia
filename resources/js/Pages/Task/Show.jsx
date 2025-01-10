@@ -1,23 +1,23 @@
-import { PROJECT_STATUS_CLASS_MAP, PROJECT_STATUS_TEXT_MAP } from "@/constants.js";
+import { TASK_STATUS_CLASS_MAP, TASK_STATUS_TEXT_MAP } from "@/constants.js";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head } from "@inertiajs/react";
 import TasksTable from "../Task/TasksTable";
 
-export default function Show ({project, tasks, success, queryParams}){
+export default function Show ({task, tasks, queryParams}){
     return (
         <AuthenticatedLayout
             header={
             <h2 className="text-xl font-semibold leading-tight text-gray-800 dark:text-gray-200">
-                {`Projects "${project.name}"`}
+                {`Tasks "${task.name}"`}
             </h2>
         }>
-            <Head title = {`Projects "${project.name}"`} />
+            <Head title = {`Tasks "${task.name}"`} />
             <div className="py-12">
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
                     <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg dark:bg-gray-800">
                         <div>
                             <img 
-                                src={project.image_path}
+                                src={task.image_path}
                                 alt =""
                                 className="w-full h-64 object-cover"
                             />
@@ -30,30 +30,30 @@ export default function Show ({project, tasks, success, queryParams}){
                                 {/* Left  Column */}
                                 <div>
                                     <div>
-                                        <label className="font-bold text-lg">Project ID</label>
-                                        <p className="mt-1">{project.id}</p>
+                                        <label className="font-bold text-lg">Task ID</label>
+                                        <p className="mt-1">{task.id}</p>
                                     </div>
 
                                     <div className="mt-4">
-                                        <label className="font-bold text-lg">Project Name</label>
-                                        <p className="mt-1">{project.name}</p>
+                                        <label className="font-bold text-lg">Task Name</label>
+                                        <p className="mt-1">{task.name}</p>
                                     </div>
 
                                     <div className="mt-4">
-                                        <label className="font-bold text-lg">Project Status</label>
+                                        <label className="font-bold text-lg">Task Status</label>
                                         <p className="mt-1">
                                             <span className={
                                                 "px-2 py-1 rounded text-white "  + 
-                                                PROJECT_STATUS_CLASS_MAP[project.status]
+                                                TASK_STATUS_CLASS_MAP[task.status]
                                                 }>
-                                                {PROJECT_STATUS_TEXT_MAP[project.status]}
+                                                {TASK_STATUS_TEXT_MAP[task.status]}
                                             </span>
                                         </p>
                                     </div>
 
                                     <div className="mt-4">
                                         <label className="font-bold text-lg">Created By</label>
-                                        <p className="mt-1">{project.createdBy.name}</p>
+                                        <p className="mt-1">{task.createdBy.name}</p>
                                     </div>
                                 </div>
 
@@ -61,31 +61,31 @@ export default function Show ({project, tasks, success, queryParams}){
                                 <div>
                                     <div>
                                         <label className="font-bold text lg">Due Date</label>
-                                        <p className="mt-1">{project.due_date}</p>
+                                        <p className="mt-1">{task.due_date}</p>
                                     </div>
                                     <div className="mt-4">
                                         <label className="font-bold text lg">Created Date</label>
-                                        <p className="mt-1">{project.created_at}</p>
+                                        <p className="mt-1">{task.created_at}</p>
                                     </div>
 
                                     <div className="mt-4">
                                         <label className="font-bold text lg">Updated By</label>
-                                        <p className="mt-1">{project.updatedBy.name}</p>
+                                        <p className="mt-1">{task.updatedBy.name}</p>
                                     </div>
                                 </div>
                             </div>
 
-                            {/* Project Description */}
+                            {/* Task Description */}
                             <div className="mt-4">
-                                    <label className="font-bold text-lg">Project Description</label>
-                                    <p className="mt-1">{project.description}</p>
+                                    <label className="font-bold text-lg">Task Description</label>
+                                    <p className="mt-1">{task.description}</p>
                             </div>
                         </div>
                     </div>  
                 </div>
             </div>
 
-            {/* other project  */}
+            {/* other task  */}
             <div className="pb-12">
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
                     <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg dark:bg-gray-800">
@@ -93,8 +93,7 @@ export default function Show ({project, tasks, success, queryParams}){
                             <TasksTable 
                                 tasks={tasks}
                                 queryParams={queryParams}
-                                hideProjectColumn={true}
-                                success={success} />
+                                hideTaskColumn={true} />
                         </div>
                     </div>  
                 </div>
