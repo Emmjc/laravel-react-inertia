@@ -15,8 +15,12 @@ Route::redirect('/','/dashboard');
 Route::middleware(['auth','verified'])->group(function(){
     Route::get('/dashboard', fn() => Inertia::render('Dashboard'))
     ->name('dashboard');
+
     //routes for project, task, and user
     Route::resource('project', ProjectController::class);
+    
+    //This route is for the specific function 'myTasks'.
+    Route::get('/task/my-tasks', [TaskController::class, 'myTasks'])->name('task.myTasks');
     Route::resource('task', TaskController::class);
     Route::resource('user', UserController::class);
 });
