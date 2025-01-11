@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\TaskController;
@@ -13,8 +14,8 @@ Route::redirect('/','/dashboard');
 
 //this route is to check if the user is authorized to login and also when the user acccess /dashboard when not authorized it will be redirected to login and if the user access / when logged in it will be redirected to /dashboard only.
 Route::middleware(['auth','verified'])->group(function(){
-    Route::get('/dashboard', fn() => Inertia::render('Dashboard'))
-    ->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class,'index'])
+        ->name('dashboard');
 
     //routes for project, task, and user
     Route::resource('project', ProjectController::class);
