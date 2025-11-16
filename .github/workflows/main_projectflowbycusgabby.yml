@@ -1,7 +1,7 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build and deploy Laravel 11 + React (Vite) app to Azure Web App - projectflowbycusgabby
+name: Build and deploy Laravel 11 + React app to Azure Web App - projectflowbycusgabby
 
 on:
   push:
@@ -16,23 +16,25 @@ jobs:
       contents: read
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
       # -----------------------------
-      # PHP + Composer Setup
+      # PHP + Composer
       # -----------------------------
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.2'
           extensions: mbstring, intl, pdo_mysql, bcmath, openssl
+          coverage: none
 
-      - name: Install Composer Dependencies
+      - name: Install Composer dependencies
         run: |
           composer install --no-dev --prefer-dist --optimize-autoloader
 
       # -----------------------------
-      # Node + Vite Build Setup
+      # Node + Vite build
       # -----------------------------
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -46,9 +48,9 @@ jobs:
         run: npm run build
 
       # -----------------------------
-      # Laravel Optimization
+      # Laravel optimizations
       # -----------------------------
-      - name: Laravel Optimizations
+      - name: Laravel optimizations
         run: |
           php artisan config:clear
           php artisan route:clear
@@ -58,9 +60,9 @@ jobs:
           php artisan view:cache
 
       # -----------------------------
-      # Upload final build artifact
+      # Upload artifact for deploy
       # -----------------------------
-      - name: Upload artifact for deployment
+      - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
           name: laravel-app
@@ -77,7 +79,7 @@ jobs:
       contents: read
 
     steps:
-      - name: Download artifact
+      - name: Download artifact from build job
         uses: actions/download-artifact@v4
         with:
           name: laravel-app
